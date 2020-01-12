@@ -1,0 +1,1140 @@
+{
+	"plugin_id": "bbmilight6",
+	"name_fr": "Milight v6",
+	"icon": "milight6.png",
+	"version": "0.0.1",
+	"creation_date": "2020-01-11",
+	"modification_date": "2020-01-11",
+	"author": "Benjamin B.<br><a target='_blank' href='https://github.com/2bprog/eedomus-milight6-plugin'>Sources sur github <img src='/img/external.png'></a>",
+	"description_fr": "Création d'un périphérique pour piloter les ampoules Mi-light avec un bridge v6<br>Sur eedomus+ uniquement",
+	"description_en": "",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "",
+	"parameters": [
+		{		
+			"parameter": "MIIP",
+			"description": "IP du bridge v6",
+			"xtype": "textfield",
+			"default_value": "",
+			"field": "style: 'padding: 3px;', width:130, allowBlank:false"
+		},
+		{
+			"parameter": "MIPORTS",
+			"description": "Port d'envoi",
+			"xtype": "numberfield",
+			"default_value": "5987",
+			"field": "style: 'padding: 3px;', minValue:1, allowDecimals:false, width:60, allowBlank:false"
+		},		
+		{
+			"parameter": "MIPORTR",
+			"description": "Port de réception",
+			"xtype": "numberfield",
+			"default_value": "55054",
+			"field": "style: 'padding: 3px;', minValue:1, allowDecimals:false, width:60, allowBlank:false"
+		},		
+		{
+			"parameter": "MIMODEL",
+			"description": "Type d'ampoule",
+			"xtype": "combo",
+			"default_value": "1",
+			"field": "style: 'padding: 3px;', width:200, allowBlank:false, store:[[1, 'Ampoule Blanche'] ,[2, 'Ampoule RGB'], [3, 'Ampoule RGBW'], [4, 'Ampoule RGBWW']], triggerAction: 'all'"
+		},
+		{
+			"parameter": "MIGROUP",
+			"description": "Groupe",
+			"xtype": "combo",
+			"default_value": "1",
+			"field": "style: 'padding: 3px;', width:200, allowBlank:false, store:[[0, 'Tous les groupes'] , [1,'Groupe 1'], [2, 'Groupe 2'], [3, 'Groupe 3'], [4, 'Groupe 4'], [5, 'Eclairage du bridge (RGBW)']], triggerAction: 'all'"
+		}
+	],
+	"scripts": [
+		{
+			"name": "2B_milight6.php"
+		}
+	],
+	"devices": [
+		{	"device_id": "ws",		"create": "plugin.parameters.MIMODEL==1",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name WS",
+			"icon": "lamp_on.png","icon2b":"Light01_LWC.png",
+			"utilisation_id": "1",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,white",
+				"VAR2": "",
+				"VAR3": "",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},
+			"values": [
+				{
+					"value": "-1",
+					"description": "On",
+					"icon": "lamp_on.png","icon2b":"Light01_On.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=on",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Off",
+					"icon": "lamp_off.png","icon2b":"Light01_Off.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=off",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "1",
+					"description": "Mode nuit",
+					"icon": "lamp_mid.png","icon2b":"Light01_ModeNuit.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=tonight",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "9",
+					"description": "Baisser la luminosité",
+					"icon": "lamp_mid.png","icon2b":"Light01_moins.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bridown",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "99",
+					"description": "Augmenter la luminosité",
+					"icon": "lamp_on.png","icon2b":"Light01_plus.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=briup",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100",
+					"description": "On",
+					"icon": "lamp_on.png","icon2b":"Light01_On.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=on",					
+					"http_type": "GET",
+					"hidden": "1"
+				}
+			]
+		},
+		{	"device_id": "wstm",		"create": "plugin.parameters.MIMODEL==1",		"parent_id": "ws",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name WS - Blancs",
+			"icon": "lamp_warm.png","icon2b":"Light01_LWC.png",
+			"utilisation_id": "43",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,white",
+				"VAR2": "plugin.devices.ws",
+				"VAR3": "",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},
+			"values": [
+				{
+					"value": "coolinc",
+					"description": "Plus froid",
+					"icon": "lamp_cold.png","icon2b":"Light01_Temppf.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "warminc",
+					"description": "Plus chaud",
+					"icon": "lamp_warm.png","icon2b":"Light01_Temppc.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		},
+		{	"device_id": "rgb",		"create": "plugin.parameters.MIMODEL==2",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGB",
+			"icon": "lamp_on.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "1",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,rgb",
+				"VAR2": "",
+				"VAR3": "",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},
+			"values": [
+				{
+					"value": "-1",
+					"description": "On",
+					"icon": "lamp_on.png","icon2b":"Light01_On.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=on",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Off",
+					"icon": "lamp_off.png","icon2b":"Light01_Off.png", 					
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=off",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "9",
+					"description": "Baisser la luminosité",
+					"icon": "lamp_mid.png","icon2b":"Light01_moins.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bridown",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "99",
+					"description": "Augmenter la luminosité",
+					"icon": "lamp_on.png","icon2b":"Light01_plus.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=briup",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100",
+					"description": "On",
+					"icon": "lamp_on.png","icon2b":"Light01_On.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=on",					
+					"http_type": "GET",
+					"hidden": "1"
+				}
+			]
+		},		
+		{	"device_id": "rgbcol",		"create": "plugin.parameters.MIMODEL==2",		"parent_id": "rgb",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGB - Couleurs",
+			"icon": "lamp_43.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "82",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,rgb",
+				"VAR2": "plugin.devices.rgb",
+				"VAR3": "32",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},
+			"values": [
+				{
+					"value": "0,0,100",
+					"description": "Bleu",
+					"icon": "lamp_05.png","icon2b":"Light01_BLEU.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",	
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0,100,0",
+					"description": "Vert",
+					"icon": "lamp_04.png","icon2b":"Light01_VERT.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "50,100,00",
+					"description": "Pomme",
+					"icon": "lamp_43.png","icon2b":"Light01_POMME.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0,100,100",
+					"description": "Cyan",
+					"icon": "lamp_08.png","icon2b":"Light01_CYAN.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "50,0,100",
+					"description": "Violet",
+					"icon": "lamp_07.png","icon2b":"Light01_VIOLET.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,0,0",
+					"description": "Rouge",
+					"icon": "lamp_03.png","icon2b":"Light01_ROUGE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,0,100",
+					"description": "Rose",
+					"icon": "lamp_38.png","icon2b":"Light01_ROSE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				}
+				,
+				{
+					"value": "100,100,0",
+					"description": "Jaune",
+					"icon": "lamp_06.png","icon2b":"Light01_JAUNE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,50,0",
+					"description": "Orange",
+					"icon": "lamp_46.png","icon2b":"Light01_ORANGE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,100,100",
+					"description": "Blanc",
+					"icon": "lamp_02.png","icon2b":"Light01_BLANC.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		},
+		{	"device_id": "rgbeff",		"create": "plugin.parameters.MIMODEL==2",		"parent_id": "rgb",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGB - Effets",
+			"icon": "simulation.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "82",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,rgb",
+				"VAR2": "plugin.devices.rgb",
+				"VAR3": "32",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},	
+			"values": [
+				{
+					"value": "-101",
+					"description": "Disco Mode - au plus lent",
+					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discoslowest&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "-100",
+					"description": "Disco Mode - plus lent",
+					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discoslower&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "1",
+					"description": "Disco Mode - précédent",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=modedown&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+					{
+					"value": "99",
+					"description": "Disco Mode - suivant",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=modeup&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100",
+					"description": "Disco Mode - plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discofaster&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "102",
+					"description": "Disco Mode - au plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discofastest&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		},
+		{	"device_id": "rgbwstd",		"create": "plugin.parameters.MIMODEL==3",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGBW",
+			"icon": "lamp_on.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "1",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,rgbw",
+				"VAR2": "",
+				"VAR3": "",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},
+			"values": [
+				{
+					"value": "-1",
+					"description": "On",
+					"icon": "lamp_on.png","icon2b":"Light01_On.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=on",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Off",
+					"icon": "lamp_off.png","icon2b":"Light01_Off.png", 					
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=off",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "1",
+					"description": "Mode nuit",
+					"icon": "lamp_mid.png","icon2b":"Light01_ModeNuit.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=tonight",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "2",
+					"description": "Min",
+					"icon": "lamp_mid.png","icon2b":"Light01_Min.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:0",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "10",
+					"description": "10%",
+					"icon": "lamp_mid.png","icon2b":"Light01_010.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "20",
+					"description": "20%",
+					"icon": "lamp_mid.png","icon2b":"Light01_020.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "30",
+					"description": "30%",
+					"icon": "lamp_mid.png","icon2b":"Light01_030.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "40",
+					"description": "40%",
+					"icon": "lamp_mid.png","icon2b":"Light01_040.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "50",
+					"description": "50%",
+					"icon": "lamp_mid.png","icon2b":"Light01_050.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "60",
+					"description": "60%",
+					"icon": "lamp_mid.png","icon2b":"Light01_060.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "70",
+					"description": "70%",
+					"icon": "lamp_mid.png","icon2b":"Light01_070.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "80",
+					"description": "80%",
+					"icon": "lamp_mid.png","icon2b":"Light01_080.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "90",
+					"description": "90%",
+					"icon": "lamp_mid.png","icon2b":"Light01_090.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100",
+					"description": "Max",
+					"icon": "lamp_on.png","icon2b":"Light01_Max.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:100",					
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		},		
+		{	"device_id": "rgbwcol",		"create": "plugin.parameters.MIMODEL==3",		"parent_id": "rgbwstd",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGBW - Couleurs",
+			"icon": "lamp_43.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "82",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,rgbw",
+				"VAR2": "plugin.devices.rgbwstd",
+				"VAR3": "32",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},
+			"values": [
+				{
+					"value": "0,0,100",
+					"description": "Bleu",
+					"icon": "lamp_05.png","icon2b":"Light01_BLEU.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",	
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0,100,0",
+					"description": "Vert",
+					"icon": "lamp_04.png","icon2b":"Light01_VERT.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "50,100,00",
+					"description": "Pomme",
+					"icon": "lamp_43.png","icon2b":"Light01_POMME.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0,100,100",
+					"description": "Cyan",
+					"icon": "lamp_08.png","icon2b":"Light01_CYAN.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "50,0,100",
+					"description": "Violet",
+					"icon": "lamp_07.png","icon2b":"Light01_VIOLET.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,0,0",
+					"description": "Rouge",
+					"icon": "lamp_03.png","icon2b":"Light01_ROUGE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,0,100",
+					"description": "Rose",
+					"icon": "lamp_38.png","icon2b":"Light01_ROSE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,100,0",
+					"description": "Jaune",
+					"icon": "lamp_06.png","icon2b":"Light01_JAUNE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,50,0",
+					"description": "Orange",
+					"icon": "lamp_46.png","icon2b":"Light01_ORANGE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,100,100",
+					"description": "Blanc",
+					"icon": "lamp_02.png","icon2b":"Light01_BLANC.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=towhite&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		},
+		{	"device_id": "rgbweff",		"create": "plugin.parameters.MIMODEL==3",		"parent_id": "rgbwstd",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGBW - Effets",
+			"icon": "simulation.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "82",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,rgbw",
+				"VAR2": "plugin.devices.rgbwstd",
+				"VAR3": "32",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},	
+			"values": [
+				{
+					"value": "-101",
+					"description": "Disco Mode - au plus lent",
+					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discoslowest&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "-100",
+					"description": "Disco Mode - plus lent",
+					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discoslower&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "1",
+					"description": "Disco Mode 1",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "2",
+					"description": "Disco Mode 2",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "3",
+					"description": "Disco Mode 3",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "4",
+					"description": "Disco Mode 4",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "5",
+					"description": "Disco Mode 5",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "6",
+					"description": "Disco Mode 6",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "7",
+					"description": "Disco Mode 7",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "8",
+					"description": "Disco Mode 8",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "9",
+					"description": "Disco Mode 9",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "1",
+					"description": "Disco Mode - plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discofaster&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "2",
+					"description": "Disco Mode - au plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discofastest&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		},
+		{	"device_id": "rgbww",		"create": "plugin.parameters.MIMODEL==4",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGBWW",
+			"icon": "lamp_on.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "1",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,rgbww",
+				"VAR2": "",
+				"VAR3": "",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},
+			"values": [
+				{
+					"value": "-1",
+					"description": "On",
+					"icon": "lamp_on.png","icon2b":"Light01_On.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=on",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Off",
+					"icon": "lamp_off.png","icon2b":"Light01_Off.png", 					
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=off",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "1",
+					"description": "Mode nuit",
+					"icon": "lamp_mid.png","icon2b":"Light01_ModeNuit.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=tonight",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "2",
+					"description": "Min",
+					"icon": "lamp_mid.png","icon2b":"Light01_Min.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:0",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "10",
+					"description": "10%",
+					"icon": "lamp_mid.png","icon2b":"Light01_010.png", 
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "20",
+					"description": "20%",
+					"icon": "lamp_mid.png","icon2b":"Light01_020.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "30",
+					"description": "30%",
+					"icon": "lamp_mid.png","icon2b":"Light01_030.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "40",
+					"description": "40%",
+					"icon": "lamp_mid.png","icon2b":"Light01_040.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "50",
+					"description": "50%",
+					"icon": "lamp_mid.png","icon2b":"Light01_050.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "60",
+					"description": "60%",
+					"icon": "lamp_mid.png","icon2b":"Light01_060.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "70",
+					"description": "70%",
+					"icon": "lamp_mid.png","icon2b":"Light01_070.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "80",
+					"description": "80%",
+					"icon": "lamp_mid.png","icon2b":"Light01_080.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "90",
+					"description": "90%",
+					"icon": "lamp_mid.png","icon2b":"Light01_090.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100",
+					"description": "Max",
+					"icon": "lamp_on.png","icon2b":"Light01_Max.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:100",					
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		},		
+		{	"device_id": "rgbwwcol",		"create": "plugin.parameters.MIMODEL==4",		"parent_id": "rgbww",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGBWW - Couleurs",
+			"icon": "lamp_43.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "82",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,rgbww",
+				"VAR2": "plugin.devices.rgbww",
+				"VAR3": "0",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},
+			"values": [
+				{
+					"value": "0,0,100",
+					"description": "Bleu",
+					"icon": "lamp_05.png","icon2b":"Light01_BLEU.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",	
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0,100,0",
+					"description": "Vert",
+					"icon": "lamp_04.png","icon2b":"Light01_VERT.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "50,100,00",
+					"description": "Pomme",
+					"icon": "lamp_43.png","icon2b":"Light01_POMME.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0,100,100",
+					"description": "Cyan",
+					"icon": "lamp_08.png","icon2b":"Light01_CYAN.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "50,0,100",
+					"description": "Violet",
+					"icon": "lamp_07.png","icon2b":"Light01_VIOLET.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,0,0",
+					"description": "Rouge",
+					"icon": "lamp_03.png","icon2b":"Light01_ROUGE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,0,100",
+					"description": "Rose",
+					"icon": "lamp_38.png","icon2b":"Light01_ROSE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,100,0",
+					"description": "Jaune",
+					"icon": "lamp_06.png","icon2b":"Light01_JAUNE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,50,0",
+					"description": "Orange",
+					"icon": "lamp_46.png","icon2b":"Light01_ORANGE.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=color:[RAW_VALUE]&adjust=[VAR3]&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100,100,100",
+					"description": "Blanc",
+					"icon": "lamp_02.png","icon2b":"Light01_BLANC.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=towhite&set=1&api=[VAR2]&eep=",
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		},
+		{	"device_id": "rgbwweff",		"create": "plugin.parameters.MIMODEL==4",		"parent_id": "rgbww",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGBWW - Effets",
+			"icon": "simulation.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "82",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,rgbww",
+				"VAR2": "plugin.devices.rgbww",
+				"VAR3": "32",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},	
+			"values": [
+				{
+					"value": "-1001",
+					"description": "Disco Mode - au plus lent",
+					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discoslowest&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "-100",
+					"description": "Disco Mode - plus lent",
+					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discoslower&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Disco Mode 1",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Disco Mode 2",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Disco Mode 3",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Disco Mode 4",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Disco Mode 5",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "0",
+					"description": "Disco Mode 6",
+					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100",
+					"description": "Disco Mode - plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discofaster&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "101",
+					"description": "Disco Mode - au plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discofastest&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		},
+		{	"device_id": "rgbwwtm",		"create": "plugin.parameters.MIMODEL==4",		"parent_id": "rgbww",
+			"module_id": "41",
+			"type": "http",
+			"name_fr": "plugin.name RGBWW - Blancs",
+			"icon": "lamp_warm.png","icon2b":"Light01_LRGB.png",
+			"utilisation_id": "82",
+			"parameters": {
+				"VAR1": "plugin.parameters.MIIP:plugin.parameters.MIPORTS:plugin.parameters.MIPORTR,plugin.parameters.MIGROUP,white",
+				"VAR2": "plugin.devices.rgbww",
+				"VAR3": "0",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "",
+				"RAW_XPATH": "",
+				"POLLING": "0",
+				"CONVERT": "0"
+			},
+			"values": [
+				{
+					"value": "0",
+					"description": "Très froid",
+					"icon": "lamp_cold.png","icon2b":"Light01_Temppf.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=temp:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+					{
+					"value": "25",
+					"description": "Froid",
+					"icon": "lamp_cold.png","icon2b":"Light01_Temppf.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=temp:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "50",
+					"description": "Naturel",
+					"icon": "lamp_cold.png","icon2b":"Light01_Temppf.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=temp:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "75",
+					"description": "Chaud",
+					"icon": "lamp_cold.png","icon2b":"Light01_Temppf.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=temp:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				},
+				{
+					"value": "100",
+					"description": "Très chaud",
+					"icon": "lamp_cold.png","icon2b":"Light01_Temppf.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=temp:[RAW_VALUE]&set=1&api=[VAR2]",
+					"http_type": "GET",
+					"hidden": "0"
+				}
+			]
+		}
+	]
+}
