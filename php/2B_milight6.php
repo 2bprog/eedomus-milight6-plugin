@@ -249,13 +249,7 @@ if ($perreur == '')
 					{
 						$rgb = explode(',', $color);
 						$hsl = sdk_rgbToHsl(floor($rgb[0] * 2.54), floor($rgb[1] * 2.54), floor($rgb[2] * 2.54));
-						/*
-						if (sdk_checkcodes($v6Codes, $typen.'bri', $perreur))	
-						{
-							$briCodes = $v6Codes[$typen.'bri'];
-							$briCodes[0x05] = round($hsl[2] * 100);
-							sdk_milight6_send($socket, $host, $ports, $portr, $ssIDs, $briCodes , $group);
-						}*/
+						
 						if (ntype == 1)
 						{	
 							if (sdk_checkcodes($v6Codes, $typen.'$sat', $perreur))
@@ -290,8 +284,8 @@ if ($perreur == '')
 					break;
 					
 				case 'sat':
-					if ($sat < 0) $sat = 0; // froid
-					if ($sat > 100) $sat = 100; // chaud
+					if ($sat < 0) $sat = 0; 
+					if ($sat > 100) $sat = 100; 
 					
 					if (sdk_checkcodes($v6Codes, $typen.$cmd, $perreur))
 					{
@@ -351,8 +345,24 @@ if ($perreur == '')
 	}
 }
 
-if ($perreur != '') echo "<error>$perreur</error>\r\n";	
-
+if ($perreur != '') 
+{
+	echo "<error>$perreur</error>\r\n";	
+}
+else
+{
+	if ($seton != 0)
+	{
+		echo "<seton>\r\n";
+		$onitem=getValue($apion);
+		if ($onitem["value"] == 0)	
+		{
+			echo "<setValue>-1</setValue>\r\n";
+			setValue($apion, -1, false, true);		
+		}
+		echo "</seton>\r\n";
+	}
+}
 echo "</tmt>\r\n";
 echo "</milight6>\r\n";
 
