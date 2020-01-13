@@ -25,10 +25,10 @@ Copy-Item "..\readme_fr.md" -Destination ".\tmp" -Force
 $json = ".\tmp\eedomus_plugin.json"
 
 # Garder icones eedomus 
- (Get-Content $json) | Foreach-Object {$_ -replace '"{1}icon2b"{1}.{0,}"{1}.{1,}"{1}.{0,},'   , ''} | Set-Content $json
+# (Get-Content $json) | Foreach-Object {$_ -replace '"{1}icon2b"{1}.{0,}"{1}.{1,}"{1}.{0,},'   , ''} | Set-Content $json
 
 # Garder mes icones    
-#(Get-Content $json) | Foreach-Object {$_ -replace ':{1}.{0,}"{1}.{1,}"icon2b"'  , ''} | Set-Content $json
+(Get-Content $json) | Foreach-Object {$_ -replace ':{1}.{0,}"{1}.{1,}"icon2b"'  , ''} | Set-Content $json
 
 
 $compress = @{

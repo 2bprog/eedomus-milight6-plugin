@@ -1228,7 +1228,7 @@
 				{
 					"value": "0",
 					"description": "Très froid",
-					"icon": "lamp_cold.png","icon2b":"Light01_TemppfLight01_TempW0png",
+					"icon": "lamp_cold.png","icon2b":"Light01_TempW0.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=temp:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
