@@ -3,17 +3,18 @@
 // 2B_milight6 : interface de pilotage des ampoules milight v6
 // -----------------------------------------------------------------------------
 // basé sur   
-// https://github.com/Basch3000/php-milight
-// https://github.com/domoticz/domoticz/blob/development/hardware/Limitless.cpp
+// 	- https://github.com/Basch3000/php-milight
+// 	- https://github.com/domoticz/domoticz/blob/development/hardware/Limitless.cpp
 // -----------------------------------------------------------------------------
 // Autres infos : 
-// https://github.com/BKrajancic/LimitlessLED-DevAPI
+// 	- https://github.com/BKrajancic/LimitlessLED-DevAPI
+// -----------------------------------------------------------------------------
 // 
 // &vars=[VAR1]
 //   VAR1 :  [ip:ports:portr,group,type]
-//   		- ip:ports:portr  : ip + port envoi + port reception du bridge v6
-//   		- group    : Identifiant du groupe [0|1|2|3|4|5] 0 = tous 5 = iBox
-//   		- type rgbw|rgbww
+//   		- ip:ports:portr	: ip + port envoi + port reception du bridge v6
+//   		- group    	  		: Identifiant du groupe [0|1|2|3|4|5] 0 = tous 5 = iBox
+//   		- type 				: white | rgb | rgbw | rgbww
 // &cmd=
 //  on
 //	off
@@ -27,7 +28,10 @@
 //	mode : [1 à 9] 
 //  modedown
 //  modeup
+// 	slowest
 // 	slower
+// 	faster
+//  fastest
 //  temp : [0 à 100] 0 Froid - 100 Chaud
 //  tempdown
 //  tempup
@@ -36,12 +40,13 @@
 // [&api=(onapi "Code API")]
 //
 // -----------------------------------------------------------------------------
-// Obsolete [&bri= | &color= | &temp = &mode] = ] 
+// Obsolete : [&bri= | &color= | &temp= | &mode] 
 // -----------------------------------------------------------------------------
 // 6B7E
 
 sdk_header("text/xml");
 echo "<milight6>\r\n";
+
 
 // Lecture ip + port envoi + port reception
 $vars = getArg('vars', false, ',0,');
@@ -58,7 +63,7 @@ if (count($hostar) > 1) $ports=$hostar[1];
 if (count($hostar) > 2) $portr=$hostar[2];
 
 $group = $varsar[1]; // 0 - all ou 1,2,3,4  ou 5 pour la ibox
-$type = strtolower($varsar[2]); // rgbw ou rgbww
+$type = strtolower($varsar[2]); // white, rgb, rgbw ou rgbww
 $cmdar = strtolower(getArg('cmd',false, '')); // commande
 
 $cmdar = explode(':', $cmdar);
@@ -67,23 +72,17 @@ $cmdparam = '';
 if (count($cmdar) > 0) $cmd=$cmdar[0];
 if (count($cmdar) > 1) $cmdparam=$cmdar[1];
 
-$color = getArg('color',false, ''); 	
-$temp = getArg('temp',false, '');  		
-$mode = getArg('mode',false, 1); 
-
 if ($cmd == 'bri' && $cmdparam !== '')			$bri = $cmdparam;  		else $bri = getArg('bri',false, -1);
 if ($cmd == 'sat' && $cmdparam !== '')			$sat = $cmdparam;  		else $sat = getArg('sat',false, -1);
 if ($cmd == 'color' && $cmdparam !== '') 		$color = $cmdparam;  	else $color = getArg('color',false, '');
 if ($cmd == 'temp' && $cmdparam !== '')			$temp = $cmdparam;  	else $temp = getArg('temp',false, -1);
-if ($cmd == 'mode' && $cmdparam !== '')	$mode = $cmdparam;	else $mode = getArg('mode',false, -1);
+if ($cmd == 'mode' && $cmdparam !== '')			$mode = $cmdparam;		else $mode = getArg('mode',false, -1);
 
 $adjust = getArg('adjust',false, 0);  // parametre : ajoutement de la couleur
 $seton= getArg("set",false, 0); //on
 $apion= getArg("api",false, 0); //onapi
 
 $perreur = '';
-
-
 
 if ($host =='') $perreur .= "[host vide] ";	// host vide
 if ($group < 0 || $group > 5) $perreur .= "[groupe ($group) incorrect] ";		
@@ -349,20 +348,18 @@ if ($perreur != '')
 {
 	echo "<error>$perreur</error>\r\n";	
 }
-else
+else if ($seton != 0)
 {
-	if ($seton != 0)
+	echo "<seton>\r\n";
+	$onitem=getValue($apion);
+	if ($onitem["value"] == 0)	
 	{
-		echo "<seton>\r\n";
-		$onitem=getValue($apion);
-		if ($onitem["value"] == 0)	
-		{
-			echo "<setValue>-1</setValue>\r\n";
-			setValue($apion, -1, false, true);		
-		}
-		echo "</seton>\r\n";
+		echo "<setValue>-1</setValue>\r\n";
+		setValue($apion, -1, false, true);		
 	}
+	echo "</seton>\r\n";
 }
+
 echo "</tmt>\r\n";
 echo "</milight6>\r\n";
 
