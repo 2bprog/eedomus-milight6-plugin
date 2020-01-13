@@ -2,7 +2,7 @@ Ce plugin eedomus permet de piloter les ampoules connectées à un bridge Mi-Light
 
 ## Prérequis 
 
-Une box eedomus+ 
+Une box eedomus+
 Un bridge Mi-Light v6 installé et configuré.
 
 ## Installation
@@ -12,6 +12,7 @@ Cliquez sur "Configuration" / "Ajouter ou supprimer un périphérique" / "Store ee
 ## Champs a configurer : 
 
 ![Configuration Mi-Light v6](https://raw.githubusercontent.com/2bprog/eedomus-milight6-plugin/master/doc/milight6-config.jpg)
+
 
 * IP : IP adresse et port (sous la forme x.x.x.x:yyyy) de votre bridge Mi-Light v4, par défaut le port est 8899 
 * Port d'envoi : Port d'emission des commandes (par défaut : 5987)
