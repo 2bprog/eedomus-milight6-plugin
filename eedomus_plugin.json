@@ -340,48 +340,48 @@
 			"values": [
 				{
 					"value": "-101",
-					"description": "Disco Mode - au plus lent",
-					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=lowest",
+					"description": "Mode - au plus lent",
+					"icon": "simulation.png","icon2b":"Light01_TRlen1.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=slowest",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "-100",
-					"description": "Disco Mode - plus lent",
-					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=lower",
+					"description": "Mode - plus lent",
+					"icon": "simulation.png","icon2b":"Light01_TRlen2.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=slower",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
-					"value": "1",
-					"description": "Disco Mode - précédent",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"value": "-1",
+					"description": "Mode - précédent",
+					"icon": "simulation.png","icon2b":"Light01_ModePrev.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=modedown&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 					{
-					"value": "99",
-					"description": "Disco Mode - suivant",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
+					"value": "1",
+					"description": "Mode - suivant",
+					"icon": "simulation.png","icon2b":"Light01_ModeNext.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=modeup&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "100",
-					"description": "Disco Mode - plus rapide",
-					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"description": "Mode - plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_TRrap2.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=faster",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
-					"value": "102",
-					"description": "Disco Mode - au plus rapide",
-					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"value": "101",
+					"description": "Mode - au plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_TRrap1.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=fastest",
 					"http_type": "GET",
 					"hidden": "0"
@@ -514,7 +514,7 @@
 					"value": "100",
 					"description": "Max",
 					"icon": "lamp_on.png","icon2b":"Light01_Max.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:100",					
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=bri:[RAW_VALUE]",					
 					"http_type": "GET",
 					"hidden": "0"
 				}
@@ -640,105 +640,106 @@
 			"values": [
 				{
 					"value": "-101",
-					"description": "Disco Mode - au plus lent",
-					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"description": "Mode - au plus lent",
+					"icon": "simulation.png","icon2b":"Light01_TRlen1.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=lowest",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "-100",
-					"description": "Disco Mode - plus lent",
-					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"description": "Mode - plus lent",
+					"icon": "simulation.png","icon2b":"Light01_TRlen2.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=lower",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "1",
-					"description": "Disco Mode 1",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "1 - Fondu Arc en Ciel",
+					"icon": "simulation.png","icon2b":"Light01_Mode1.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
-				},
+				},			
 				{
 					"value": "2",
-					"description": "Disco Mode 2",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "2 - Alerte Blanc",
+					"icon": "simulation.png","icon2b":"Light01_Mode2.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "3",
-					"description": "Disco Mode 3",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "3 - Clignotement Arc en Ciel",
+					"icon": "simulation.png","icon2b":"Light01_Mode3.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "4",
-					"description": "Disco Mode 4",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "4 - Arc en Ciel Sauté d’une couleur à l’autre",
+					"icon": "simulation.png","icon2b":"Light01_Mode4.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "5",
-					"description": "Disco Mode 5",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "5 - Saut de couleur et luminosité aléatoire",
+					"icon": "simulation.png","icon2b":"Light01_Mode5.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "6",
-					"description": "Disco Mode 6",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "6 - Alerte Rouge",
+					"icon": "simulation.png","icon2b":"Light01_Mode6.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "7",
-					"description": "Disco Mode 7",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "7 - Alerte Verte",
+					"icon": "simulation.png","icon2b":"Light01_Mode7.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "8",
-					"description": "Disco Mode 8",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "8 - Alerte Bleu",
+					"icon": "simulation.png","icon2b":"Light01_Mode8.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "9",
-					"description": "Disco Mode 9",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "9 - Disco Aleatoire",
+					"icon": "simulation.png","icon2b":"Light01_Mode9.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "100",
-					"description": "Disco Mode - plus rapide",
-					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"description": "Mode - plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_TRrap2.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=faster",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "101",
-					"description": "Disco Mode - au plus rapide",
-					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"description": "Mode - au plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_TRrap1.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=fastest",
+					"http_type": "GET",
 					"hidden": "0"
 				}
 			]
@@ -995,104 +996,104 @@
 			"values": [
 				{
 					"value": "-101",
-					"description": "Disco Mode - au plus lent",
-					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"description": "Mode - au plus lent",
+					"icon": "simulation.png","icon2b":"Light01_TRlen1.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=lowest",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "-100",
-					"description": "Disco Mode - plus lent",
-					"icon": "simulation.png","icon2b":"Light01_Dicoslow.png",
+					"description": "Mode - plus lent",
+					"icon": "simulation.png","icon2b":"Light01_TRlen2.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=lower",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "1",
-					"description": "Disco Mode 1",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "1 - Fondu Arc en Ciel",
+					"icon": "simulation.png","icon2b":"Light01_Mode1.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "2",
-					"description": "Disco Mode 2",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "2 - Alerte Blanc",
+					"icon": "simulation.png","icon2b":"Light01_Mode2.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "3",
-					"description": "Disco Mode 3",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "3 - Clignotement Arc en Ciel",
+					"icon": "simulation.png","icon2b":"Light01_Mode3.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "4",
-					"description": "Disco Mode 4",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "4 - Arc en Ciel Sauté d’une couleur à l’autre",
+					"icon": "simulation.png","icon2b":"Light01_Mode4.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "5",
-					"description": "Disco Mode 5",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "5 - Saut de couleur et luminosité aléatoire",
+					"icon": "simulation.png","icon2b":"Light01_Mode5.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "6",
-					"description": "Disco Mode 6",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "6 - Alerte Rouge",
+					"icon": "simulation.png","icon2b":"Light01_Mode6.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "7",
-					"description": "Disco Mode 7",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "7 - Alerte Verte",
+					"icon": "simulation.png","icon2b":"Light01_Mode7.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "8",
-					"description": "Disco Mode 8",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "8 - Alerte Bleu",
+					"icon": "simulation.png","icon2b":"Light01_Mode8.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "9",
-					"description": "Disco Mode 9",
-					"icon": "simulation.png","icon2b":"Light01_DicoMode.png",
-					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=discomode:[RAW_VALUE]&set=1&api=[VAR2]",
+					"description": "9 - Disco Aleatoire",
+					"icon": "simulation.png","icon2b":"Light01_Mode9.png",
+					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=mode:[RAW_VALUE]&set=1&api=[VAR2]",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "100",
-					"description": "Disco Mode - plus rapide",
-					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"description": "Mode - plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_TRrap2.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=faster",
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "101",
-					"description": "Disco Mode - au plus rapide",
-					"icon": "simulation.png","icon2b":"Light01_Dicofast.png",
+					"description": "Mode - au plus rapide",
+					"icon": "simulation.png","icon2b":"Light01_TRrap1.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=fastest",
 					"http_type": "GET",
 					"hidden": "0"
@@ -1120,7 +1121,7 @@
 				{
 					"value": "0",
 					"description": "0%",
-					"icon": "lamp_off.png","icon2b":"Light01_Off.png", 					
+					"icon": "lamp_off.png","icon2b":"Light01_S000.png", 					
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
@@ -1128,7 +1129,7 @@
 				{
 					"value": "10",
 					"description": "10%",
-					"icon": "lamp_mid.png","icon2b":"Light01_010.png", 
+					"icon": "lamp_mid.png","icon2b":"Light01_S010.png", 
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
@@ -1136,7 +1137,7 @@
 				{
 					"value": "20",
 					"description": "20%",
-					"icon": "lamp_mid.png","icon2b":"Light01_020.png",
+					"icon": "lamp_mid.png","icon2b":"Light01_S020.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
@@ -1144,7 +1145,7 @@
 				{
 					"value": "30",
 					"description": "30%",
-					"icon": "lamp_mid.png","icon2b":"Light01_030.png",
+					"icon": "lamp_mid.png","icon2b":"Light01_S030.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
@@ -1152,7 +1153,7 @@
 				{
 					"value": "40",
 					"description": "40%",
-					"icon": "lamp_mid.png","icon2b":"Light01_040.png",
+					"icon": "lamp_mid.png","icon2b":"Light01_S040.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
@@ -1160,7 +1161,7 @@
 				{
 					"value": "50",
 					"description": "50%",
-					"icon": "lamp_mid.png","icon2b":"Light01_050.png",
+					"icon": "lamp_mid.png","icon2b":"Light01_S050.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
@@ -1168,7 +1169,7 @@
 				{
 					"value": "60",
 					"description": "60%",
-					"icon": "lamp_mid.png","icon2b":"Light01_060.png",
+					"icon": "lamp_mid.png","icon2b":"Light01_S060.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
@@ -1176,7 +1177,7 @@
 				{
 					"value": "70",
 					"description": "70%",
-					"icon": "lamp_mid.png","icon2b":"Light01_070.png",
+					"icon": "lamp_mid.png","icon2b":"Light01_S070.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
@@ -1184,7 +1185,7 @@
 				{
 					"value": "80",
 					"description": "80%",
-					"icon": "lamp_mid.png","icon2b":"Light01_080.png",
+					"icon": "lamp_mid.png","icon2b":"Light01_S080.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
@@ -1192,15 +1193,15 @@
 				{
 					"value": "90",
 					"description": "90%",
-					"icon": "lamp_mid.png","icon2b":"Light01_090.png",
+					"icon": "lamp_mid.png","icon2b":"Light01_S090.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
 				},
 				{
 					"value": "100",
-					"description": "Max",
-					"icon": "lamp_on.png","icon2b":"Light01_Max.png",
+					"description": "100%",
+					"icon": "lamp_on.png","icon2b":"Light01_S100.png",
 					"http_url": "http://localhost/script/?exec=2B_milight6.php&vars=[VAR1]&cmd=sat:[RAW_VALUE]&set=1&api=[VAR2]",					
 					"http_type": "GET",
 					"hidden": "0"
