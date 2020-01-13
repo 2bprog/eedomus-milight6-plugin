@@ -24,7 +24,7 @@
 //	tonight
 //	color : [0 à 100],[0 à 100],[0 à 100]]
 //  sat : [0 à 100]
-//	discomode : [1 à 9] 
+//	mode : [1 à 9] 
 //  modedown
 //  modeup
 // 	slower
@@ -36,7 +36,7 @@
 // [&api=(onapi "Code API")]
 //
 // -----------------------------------------------------------------------------
-// Obsolete [&bri= | &color= | &temp = &discomode] = ] 
+// Obsolete [&bri= | &color= | &temp = &mode] = ] 
 // -----------------------------------------------------------------------------
 // 6B7E
 
@@ -69,13 +69,13 @@ if (count($cmdar) > 1) $cmdparam=$cmdar[1];
 
 $color = getArg('color',false, ''); 	
 $temp = getArg('temp',false, '');  		
-$discomode = getArg('discomode',false, 1); 
+$mode = getArg('mode',false, 1); 
 
 if ($cmd == 'bri' && $cmdparam !== '')			$bri = $cmdparam;  		else $bri = getArg('bri',false, -1);
 if ($cmd == 'sat' && $cmdparam !== '')			$sat = $cmdparam;  		else $sat = getArg('sat',false, -1);
 if ($cmd == 'color' && $cmdparam !== '') 		$color = $cmdparam;  	else $color = getArg('color',false, '');
 if ($cmd == 'temp' && $cmdparam !== '')			$temp = $cmdparam;  	else $temp = getArg('temp',false, -1);
-if ($cmd == 'discomode' && $cmdparam !== '')	$discomode = $cmdparam;	else $discomode = getArg('discomode',false, -1);
+if ($cmd == 'mode' && $cmdparam !== '')	$mode = $cmdparam;	else $mode = getArg('mode',false, -1);
 
 $adjust = getArg('adjust',false, 0);  // parametre : ajoutement de la couleur
 $seton= getArg("set",false, 0); //on
@@ -90,7 +90,7 @@ if ($group < 0 || $group > 5) $perreur .= "[groupe ($group) incorrect] ";
 if ( $cmd=='bri' && (($bri < 0) || ($bri > 100)))	$perreur .= "[bri ($bri) incorrect] ";	
 if ( $cmd=='sat' && (($sat < 0) || ($sat > 100)))	$perreur .= "[sat ($sat) incorrect] ";	
 if ( $cmd=='color' && (count(explode(',', $color)) != 3))	$perreur .= "[color ($color) incorrect] ";	
-if ( $cmd=='discomode' && (($discomode < 1) || ($discomode > 9)))	$perreur .= "[discomode ($discomode) incorrect] ";	
+if ( $cmd=='mode' && (($mode < 1) || ($mode > 9)))	$perreur .= "[mode ($mode) incorrect] ";	
 
 if ($group == 5) $typen = 0;
 else if ($type == 'rgbww') $typen = 1;
@@ -147,9 +147,9 @@ $v6Codes = array(
 	// 3tonight => N/A
 	'4tonight' => array( 0x31, 0x00, 0x00, 0x01, 0x01, 0x06, 0x00, 0x00, 0x00, 0x00 ),
 	 
-	'0discomode' => array( 0x31, 0x00, 0x00, 0x00, 0x04, 0x01, 0x00, 0x00, 0x00, 0x01 ), //(6th hex values 0x01 to 0x09 : examples: 01 = Mode1, 02 = Mode2, 03 = Mode3 .. 09 = Mode9)
-	'1discomode' => array( 0x31, 0x00, 0x00, 0x08, 0x06, 0x01, 0x00, 0x00, 0x00, 0x00 ),  //(6th hex values 0x01 to 0x09 : examples: 01 = Mode1, 02 = Mode2, 03 = Mode3 .. 09 = Mode9)
-	'2discomode' => array( 0x31, 0x00, 0x00, 0x07, 0x04, 0x01, 0x00, 0x00, 0x00, 0x00 ),   //(6th hex values 0x01 to 0x09 : examples: 01 = Mode1, 02 = Mode2, 03 = Mode3 .. 09 = Mode9)
+	'0mode' => array( 0x31, 0x00, 0x00, 0x00, 0x04, 0x01, 0x00, 0x00, 0x00, 0x01 ), //(6th hex values 0x01 to 0x09 : examples: 01 = Mode1, 02 = Mode2, 03 = Mode3 .. 09 = Mode9)
+	'1mode' => array( 0x31, 0x00, 0x00, 0x08, 0x06, 0x01, 0x00, 0x00, 0x00, 0x00 ),  //(6th hex values 0x01 to 0x09 : examples: 01 = Mode1, 02 = Mode2, 03 = Mode3 .. 09 = Mode9)
+	'2mode' => array( 0x31, 0x00, 0x00, 0x07, 0x04, 0x01, 0x00, 0x00, 0x00, 0x00 ),   //(6th hex values 0x01 to 0x09 : examples: 01 = Mode1, 02 = Mode2, 03 = Mode3 .. 09 = Mode9)
 
 	'3modedown' => array( 0x31, 0x00, 0x00, 0x05, 0x01, 0x05, 0x00, 0x00, 0x00, 0x00 ),
 	'3modeup' => array( 0x31, 0x00, 0x00, 0x05, 0x01, 0x06, 0x00, 0x00, 0x00, 0x00 ),
@@ -180,7 +180,7 @@ echo "<sat>".$sat."</sat>\r\n";
 echo "<color>".$color."</color>\r\n";
 echo "<temp>".$temp."</temp>\r\n";
 echo "<adjust>".$adjust."</adjust>\r\n";
-echo "<discomode>".$discomode."</discomode>\r\n";
+echo "<mode>".$mode."</mode>\r\n";
 echo "<seton>".$seton."</seton>\r\n";
 echo "<apion>".$apion."</apion>\r\n";
 echo "</input>\r\n";
@@ -295,14 +295,14 @@ if ($perreur == '')
 					}
 					break;
 				
-				case 'discomode':
+				case 'mode':
 					// on , cmd * x
 					sdk_milight6_send($socket, $host, $ports, $portr, $ssIDs, $v6Codes[$typen.'on'], $group);						
 					
 					if (sdk_checkcodes($v6Codes, $typen.$cmd, $perreur))
 					{
 							$discoCodes =  $v6Codes[$typen.$cmd];
-						if ($discomode >= 0 && $discomode <= 9) $discoCodes[0X05] = $discomode - 1 ; 
+						if ($mode >= 0 && $mode <= 9) $discoCodes[0X05] = $mode - 1 ; 
 						sdk_milight6_send($socket, $host, $ports, $portr, $ssIDs, $discoCodes , $group);
 					}
 					break;
