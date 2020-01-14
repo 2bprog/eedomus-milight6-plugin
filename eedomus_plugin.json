@@ -2,7 +2,7 @@
 	"plugin_id": "bbmilight6",
 	"name_fr": "Milight v6",
 	"icon": "milight6.png",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"creation_date": "2020-01-11",
 	"modification_date": "2020-01-14",
 	"author": "Benjamin B.<br><a target='_blank' href='https://github.com/2bprog/eedomus-milight6-plugin'>Sources sur github <img src='/img/external.png'></a>",
@@ -18,7 +18,7 @@
 			"description": "IP du bridge v6",
 			"xtype": "textfield",
 			"default_value": "",
-			"field": "style: 'padding: 3px;', width:130, allowBlank:false"
+			"field": "style: 'padding: 3px;', width:130, allowBlank:false, maskRe:/[0-9.]/, regex:/^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$/, regexText:'Adresse IP invalide [0-255].[0-255].[0-255].[0-255]'"
 		},
 		{
 			"parameter": "MIPORTS",
