@@ -20,7 +20,7 @@ if (Test-Path $zip) {  Remove-Item $zip }
 Copy-Item -Path "..\img\*.png" -Destination ".\tmp\img\" -Force
 Copy-Item -Path "..\php\*.php" -Destination ".\tmp" -Force
 Copy-Item "..\eedomus_plugin.json" -Destination ".\tmp" -Force
-Copy-Item "..\readme_fr.md" -Destination ".\tmp" -Force
+Copy-Item "..\readme.md" -Destination ".\tmp\readme_fr.md" -Force
 
 $json = ".\tmp\eedomus_plugin.json"
 
