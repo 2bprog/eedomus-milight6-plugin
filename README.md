@@ -5,6 +5,11 @@ Ce plugin eedomus permet de piloter les ampoules connectées à un bridge Mi-Light
 * Une box eedomus+
 * Un bridge Mi-Light v6 installé et configuré.
 
+Exemple de controleur Mi-Light v6 :
+
+![Exemple Mi-Light v6](https://raw.githubusercontent.com/2bprog/eedomus-milight6-plugin/master/doc/milightv6.png)
+
+
 ## Installation
 
 * Cliquez sur "Configuration" / "Ajouter ou supprimer un périphérique" / "Store eedomus" / "Milight v6" / "Créer"
@@ -40,6 +45,7 @@ Ce plugin eedomus permet de piloter les ampoules connectées à un bridge Mi-Light
 ![Ampoule blanche](https://raw.githubusercontent.com/2bprog/eedomus-milight6-plugin/master/doc/rgbww.jpg)
 
 ## Remarque 
+
 * N'ayant pas de Bridge V6, je n'ai pas pu tester ce plugin directement, ce sont les utilisateurs qui me font un retour sur le bon fonctionnement.
 
 ## Périphériques testés par les utilisateurs
